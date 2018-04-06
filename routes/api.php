@@ -13,23 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/login', function (Request $request) {
-    $data     = $request->all();
-    $http     = new GuzzleHttp\Client;
-    $response = $http->post(env("APP_URL") . 'oauth/token', [
-        'form_params' => [
-            'grant_type'    => 'password',
-            'client_id'     => env("CLIENT_ID"),
-            'client_secret' => env("CLIENT_SECRET"),
-            'username'      => array_get($data, 'username'),
-            'password'      => array_get($data, 'password'),
-            'scope'         => '*',
-        ],
-    ]);
+Route::post('/login', 'Admin\UserController@login')->name('login');
 
-    return json_decode((string)$response->getBody(), true);
-})->name('login');
-
+Route::middleware('auth:api')->namespace('Admin')->group(function (){
+    Route::get('/users','UserController@index');
+    Route::get('/user_info','UserController@userInfo');
+    Route::get('/store','UserController@store');
+    Route::get('/update','UserController@update');
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
