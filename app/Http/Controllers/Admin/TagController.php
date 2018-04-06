@@ -26,7 +26,7 @@ class TagController extends ApiController
         $data = $this->tagRepository->store($inputs);
         return $this->apiResponse($data);
     }
-    public function  edit(Request $request,$id){
+    public function  update(Request $request,$id){
         $inputs = $request->only(['']);
         $data =  $this->tagRepository->update($id,$inputs);
         return $this->apiResponse($data);

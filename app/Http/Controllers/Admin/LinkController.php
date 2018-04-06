@@ -28,7 +28,7 @@ class LinkController extends ApiController
         return $this->apiResponse($data);
     }
 
-    public function  edit(Request $request,$id){
+    public function  update(Request $request,$id){
         $inputs = $request->only(['']);
         $data =  $this->linkRepository->update($id,$inputs);
         return $this->apiResponse($data);
