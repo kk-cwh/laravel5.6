@@ -46,11 +46,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * 博客前台首页相关路由api
  */
-Route::group(function () {
-    Route::get('/_articles', 'HomeController@articles');
-    Route::get('/_articles/{id}', 'HomeController@articleDetail');
-    Route::get('/_types', 'HomeController@types');
-    Route::get('/_tags', 'HomeController@tags');
-    Route::get('/_archives', 'HomeController@archives');
-});
+// Route::group(function () {
+//     Route::get('/_articles', 'HomeController@articles');
+//     Route::get('/_articles/{id}', 'HomeController@articleDetail');
+//     Route::get('/_types', 'HomeController@types');
+//     Route::get('/_tags', 'HomeController@tags');
+//     Route::get('/_archives', 'HomeController@archives');
+// });
 
