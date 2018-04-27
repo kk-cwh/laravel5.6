@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 微信下单接口
+Route::get('/order', 'WeChatController@order');
