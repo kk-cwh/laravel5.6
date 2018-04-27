@@ -12,6 +12,18 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/**
+ * 博客前台首页相关路由api
+ */
+Route::group([],function() {
+    Route::get('/_articles', 'HomeController@articles');
+    Route::get('/_articles/{id}', 'HomeController@articleDetail');
+    Route::get('/_types', 'HomeController@types');
+    Route::get('/_tags', 'HomeController@tags');
+    Route::get('/_archives', 'HomeController@archives');
+});
+
 //后台管理登录 api
 Route::post('/login', 'Admin\UserController@login')->name('login');
 //后台管理相关接口api
@@ -43,14 +55,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-/**
- * 博客前台首页相关路由api
- */
-// Route::group(function () {
-//     Route::get('/_articles', 'HomeController@articles');
-//     Route::get('/_articles/{id}', 'HomeController@articleDetail');
-//     Route::get('/_types', 'HomeController@types');
-//     Route::get('/_tags', 'HomeController@tags');
-//     Route::get('/_archives', 'HomeController@archives');
-// });
+
 

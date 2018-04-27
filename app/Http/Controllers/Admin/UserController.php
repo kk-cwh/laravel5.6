@@ -30,7 +30,7 @@ class UserController extends ApiController
         $data = $request->all();
         $http = new Client();
         try {
-            $response = $http->post(env("APP_URL") . 'oauth/token', [
+            $response = $http->post(env("APP_URL") . '/oauth/token', [
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => env("CLIENT_ID"),
