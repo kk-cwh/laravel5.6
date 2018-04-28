@@ -18,25 +18,25 @@ class CategoryController extends ApiController
 
     public function  index(){
        $data =  $this->categoryRepository->pageToArray();
-       return $this->apiResponse($data);
+       return $this->successResponse($data);
     }
 
     public function store(Request $request)
     {
         $inputs  = $request->all();
         $data = $this->categoryRepository->store($inputs);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
     public function  update(Request $request,$id){
         $inputs = $request->only(['']);
         $data =  $this->categoryRepository->update($id,$inputs);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
     public function  show($id){
         $data =  $this->categoryRepository->getById($id);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
 }

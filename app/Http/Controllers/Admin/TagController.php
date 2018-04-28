@@ -18,22 +18,22 @@ class TagController extends ApiController
 
     public function  index(){
         $data =  $this->tagRepository->pageToArray();
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
     public function store(Request $request)
     {
         $inputs  = $request->all();
         $data = $this->tagRepository->store($inputs);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
     public function  update(Request $request,$id){
         $inputs = $request->only(['']);
         $data =  $this->tagRepository->update($id,$inputs);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
     public function  show($id){
         $data =  $this->tagRepository->getById($id);
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 }

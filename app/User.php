@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -30,5 +31,13 @@ class User extends Authenticatable
 
     public function findForPassport($username){
         return User::where('name',$username)->first();
+    }
+
+    /**
+     * 用户角色
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany\
+     */
+    public function roles(){
+        return $this->belongsToMany(Role::class,'user_roles','user_id','role_id');
     }
 }

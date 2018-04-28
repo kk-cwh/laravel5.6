@@ -27,7 +27,7 @@ class ArticleController extends ApiController
     {
         $article = Article::with('type','tags')->where('id', $id)->first();
 
-        return $this->apiResponse($article);
+        return $this->successResponse($article);
     }
 
     /**
@@ -38,7 +38,7 @@ class ArticleController extends ApiController
     public function index()
     {
         $data  = $this->articleRepository->pageToArray();
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
 
@@ -52,7 +52,7 @@ class ArticleController extends ApiController
         $article = $this->articleRepository->getById($id);
         $isShow  = array_get($article, 'is_show') == 1 ? 0 : 1;
         $this->articleRepository->update($id, ['is_show', $isShow]);
-        return $this->apiResponse();
+        return $this->successResponse();
     }
 
 //  发布文章
@@ -78,7 +78,7 @@ class ArticleController extends ApiController
             DB::table('tag_articles')->insert($tmps);
         }
 
-        return $this->apiResponse($article);
+        return $this->successResponse($article);
     }
 
 
@@ -94,12 +94,12 @@ class ArticleController extends ApiController
             $result = $this->articleRepository->update($id, $inputs);
 
             if ($result) {
-                return $this->apiResponse();
+                return $this->successResponse();
             }
 
         } else {
-            return $this->apiResponse([],'参数有误', 400);
+            return $this->errorResponse('参数有误');
         }
-        return $this->apiResponse('','', 500);
+        return $this->errorResponse('系统繁忙',500);
     }
 }

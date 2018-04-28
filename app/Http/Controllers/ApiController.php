@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+
+    const  ERROR_CODE = 1;
+    const  SUCCESS_CODE = 0;
+
     protected function validateRequest(Request $request, array $rules)
     {
 
@@ -22,8 +26,14 @@ class ApiController extends Controller
         return true;
     }
 
-    public function apiResponse($data=[],$message='ok',$status=200)
+    public function successResponse($data=[],$msg='ok',$status=200)
     {
-        return response()->json(compact('message','data','status'), $status);
+        $code = self::SUCCESS_CODE;
+        return response()->json(compact('data','msg','code'), $status);
+    }
+
+    public function errorResponse($msg='error',$status=400){
+        $code = self::ERROR_CODE;
+        return response()->json(compact('msg','code'), $status);
     }
 }

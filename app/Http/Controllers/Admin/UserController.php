@@ -56,7 +56,7 @@ class UserController extends ApiController
     public function index()
     {
         $data = $this->userRepository->pageToArray();
-        return $this->apiResponse($data);
+        return $this->successResponse($data);
     }
 
 
@@ -68,7 +68,7 @@ class UserController extends ApiController
     public function userInfo(Request $request)
     {
         $user = $request->user();
-        return $this->apiResponse($user);
+        return $this->successResponse($user);
     }
 
     /**
@@ -82,7 +82,7 @@ class UserController extends ApiController
         $inputs['password'] = bcrypt(array_get($inputs, 'password', '123456'));
         $inputs['date'] = date('Y-m-d', strtotime(array_get($inputs, 'date')));
         $user = $this->userRepository->store($inputs);
-        return $this->apiResponse($user);
+        return $this->successResponse($user);
     }
 
 
@@ -103,13 +103,13 @@ class UserController extends ApiController
             $result = $this->userRepository->update($id, $inputs);
 
             if ($result) {
-                return $this->apiResponse();
+                return $this->successResponse();
             }
 
         } else {
-            return $this->apiResponse([], '参数有误', 400);
+            return $this->errorResponse('参数有误');
         }
-        return $this->apiResponse('', '', 500);
+        return $this->errorResponse('系统繁忙', 500);
     }
 
 }

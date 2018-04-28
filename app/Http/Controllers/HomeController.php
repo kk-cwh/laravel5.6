@@ -13,14 +13,14 @@ class HomeController extends ApiController
     public function types()
     {
         $types = Category::all(['id', 'name']);
-        return $this->apiResponse(compact('types'));
+        return $this->successResponse(compact('types'));
     }
 
     // 文章标签
     public function tags()
     {
         $tags = Tag::withCount('articles')->get(['id', 'name']);
-        return $this->apiResponse(compact('tags'));
+        return $this->successResponse(compact('tags'));
     }
 
     // 文章
@@ -40,7 +40,7 @@ class HomeController extends ApiController
         $articles['current_page'] = array_get($data, 'current_page');
         $articles['last_page']    = array_get($data, 'last_page');
         $articles['list']         = array_get($data, 'data');
-        return $this->apiResponse(compact('articles'));
+        return $this->successResponse(compact('articles'));
     }
 
 
@@ -48,7 +48,7 @@ class HomeController extends ApiController
     {
         $article = Article::with(['type', 'tags'])->find($id);
 
-        return $this->apiResponse(compact('article'));
+        return $this->successResponse(compact('article'));
     }
 
     public function archives(Request $request)
@@ -65,6 +65,6 @@ class HomeController extends ApiController
         $articles['current_page'] = array_get($data, 'current_page');
         $articles['last_page']    = array_get($data, 'last_page');
         $articles['list']         = collect(array_get($data, 'data'))->groupBy('archives');
-        return $this->apiResponse(compact('articles'));
+        return $this->successResponse(compact('articles'));
     }
 }

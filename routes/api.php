@@ -24,6 +24,16 @@ Route::group([],function() {
     Route::get('/_archives', 'HomeController@archives');
 });
 
+
+Route::namespace('Admin')->group(function() {
+
+    Route::get('permissions', 'PermissionController@index');
+    Route::post('permissions',  'PermissionController@store');
+    Route::put('permissions',  'PermissionController@update');
+    Route::delete('permissions',  'PermissionController@destroy');
+
+});
+
 //后台管理登录 api
 Route::post('/login', 'Admin\UserController@login')->name('login');
 //后台管理相关接口api
