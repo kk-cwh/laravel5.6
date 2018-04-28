@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\ApiController;
 use App\Repositories\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class PermissionController extends Controller
+class PermissionController extends ApiController
 {
     private $permissionRepository ;
 
@@ -18,16 +19,24 @@ class PermissionController extends Controller
 
     public function index(Request $request)
     {
-        $this->permissionRepository->pageToArray();
+        $number = $request->input('number',10);
+        $data = $this->permissionRepository->pageToArray($number);
+        return  $this->successResponse($data);
     }
 
     public function store(Request $request)
     {
-
+        $inputs = $request->only(['title','sub_title','name']);
+        $data = $this->permissionRepository->store($inputs);
+        return $this->successResponse($data);
     }
 
     public function update(Request $request)
     {
+        $id = $request->input('id');
+        $inputs = $request->only('title','sub_title','name');
+        $data = $this->permissionRepository->update($id,$inputs);
+        return $this->successResponse($data);
 
     }
 

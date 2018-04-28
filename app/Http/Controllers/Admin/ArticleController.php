@@ -32,8 +32,8 @@ class ArticleController extends ApiController
 
     /**
      * 文章列表
-     * @param $id
      * @return mixed
+     * @internal param $id
      */
     public function index()
     {
