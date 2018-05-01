@@ -16,6 +16,11 @@ class PermissionController extends ApiController
         $this->permissionRepository = $permissionRepository;
     }
 
+    /**
+     * 权限查询
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $number = $request->input('number',10);
@@ -23,6 +28,11 @@ class PermissionController extends ApiController
         return  $this->successResponse($data);
     }
 
+    /**
+     * 添加权限
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $inputs = $request->only(['title','sub_title','name']);
@@ -30,6 +40,12 @@ class PermissionController extends ApiController
         return $this->successResponse($data);
     }
 
+
+    /**
+     * 更新权限
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request)
     {
         $id = $request->input('id');
@@ -40,6 +56,7 @@ class PermissionController extends ApiController
     }
 
     /**
+     * 删除权限
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */

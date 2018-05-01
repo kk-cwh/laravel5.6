@@ -20,6 +20,11 @@ class RoleController extends ApiController
         $this->roleRepository = $roleRepository;
     }
 
+    /**
+     * 查询角色
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $number = $request->input('number',10);
@@ -27,6 +32,12 @@ class RoleController extends ApiController
         return  $this->successResponse($data);
     }
 
+
+    /**
+     * 新增角色信息
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $inputs = $request->only(['name','description','status']);
@@ -34,6 +45,10 @@ class RoleController extends ApiController
         return $this->successResponse($data);
     }
 
+    /**修改编辑角色
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request)
     {
         $id = $request->input('id');
@@ -44,6 +59,7 @@ class RoleController extends ApiController
     }
 
     /**
+     * 删除角色信息
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
