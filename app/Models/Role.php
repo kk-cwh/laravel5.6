@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $fillable = ['name','status','description'];
+
 
    public function menus(){
        return $this->belongsToMany(Menu::class,'role_menus','role_id','menu_id');

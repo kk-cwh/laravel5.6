@@ -12,6 +12,10 @@ class ArticleController extends ApiController
 {
     protected $articleRepository;
 
+    /**
+     * ArticleController constructor.
+     * @param ArticleRepository $articleRepository
+     */
     public function __construct(ArticleRepository $articleRepository)
     {
         $this->articleRepository = $articleRepository;

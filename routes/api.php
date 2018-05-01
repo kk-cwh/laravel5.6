@@ -32,6 +32,18 @@ Route::namespace('Admin')->group(function() {
     Route::put('permissions',  'PermissionController@update');
     Route::delete('permissions',  'PermissionController@destroy');
 
+
+    Route::get('roles', 'RoleController@index');
+    Route::post('roles',  'RoleController@store');
+    Route::put('roles',  'RoleController@update');
+    Route::delete('roles',  'RoleController@destroy');
+
+
+    Route::get('menus', 'MenuController@index');
+    Route::post('menus',  'MenuController@store');
+    Route::put('menus',  'MenuController@update');
+    Route::delete('menus',  'MenuController@destroy');
+
 });
 
 //后台管理登录 api

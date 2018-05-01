@@ -3,38 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\ApiController;
-use App\Repositories\PermissionRepository;
+use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 
 
-class PermissionController extends ApiController
+class RoleController extends ApiController
 {
-    private $permissionRepository ;
+    private $roleRepository ;
 
-    public function __construct(PermissionRepository $permissionRepository)
+    /**
+     * RoleController constructor.
+     * @param RoleRepository $roleRepository
+     */
+    public function __construct(RoleRepository $roleRepository)
     {
-        $this->permissionRepository = $permissionRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function index(Request $request)
     {
         $number = $request->input('number',10);
-        $data = $this->permissionRepository->pageToArray($number);
+        $data = $this->roleRepository->pageToArray($number);
         return  $this->successResponse($data);
     }
 
     public function store(Request $request)
     {
-        $inputs = $request->only(['title','sub_title','name']);
-        $data = $this->permissionRepository->store($inputs);
+        $inputs = $request->only(['name','description','status']);
+        $data = $this->roleRepository->store($inputs);
         return $this->successResponse($data);
     }
 
     public function update(Request $request)
     {
         $id = $request->input('id');
-        $inputs = $request->only('title','sub_title','name');
-        $data = $this->permissionRepository->update($id,$inputs);
+        $inputs = $request->only('name','description','status');
+        $data = $this->roleRepository->update($id,$inputs);
         return $this->successResponse($data);
 
     }
@@ -46,7 +50,7 @@ class PermissionController extends ApiController
     public function destroy(Request $request)
     {
         $id = $request->input('id');
-        $data = $this->permissionRepository->destroy($id);
+        $data = $this->roleRepository->destroy($id);
         return $this->successResponse($data);
     }
 }
