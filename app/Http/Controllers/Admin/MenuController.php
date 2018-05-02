@@ -23,7 +23,7 @@ class MenuController extends ApiController
     public function index(Request $request)
     {
         $number = $request->input('number',10);
-        $data = $this->menuRepository->pageToArray($number);
+        $data = $this->menuRepository->menuTree();
         return  $this->successResponse($data);
     }
 
@@ -34,7 +34,7 @@ class MenuController extends ApiController
      */
     public function store(Request $request)
     {
-        $inputs = $request->only(['title','name','description','status']);
+        $inputs = $request->only(['title','name','description','status','parent_id']);
         $data = $this->menuRepository->store($inputs);
         return $this->successResponse($data);
     }
@@ -47,7 +47,7 @@ class MenuController extends ApiController
     public function update(Request $request)
     {
         $id = $request->input('id');
-        $inputs = $request->only(['title','name','description','status']);
+        $inputs = $request->only(['title','name','description','status','parent_id']);
         $data = $this->menuRepository->update($id,$inputs);
         return $this->successResponse($data);
 

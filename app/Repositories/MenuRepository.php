@@ -21,4 +21,13 @@ class MenuRepository
     {
         $this->model = $model;
     }
+
+
+    /**
+     * 二级菜单
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function menuTree(){
+        return $this->model->with('children')->where('parent_id',0)->get();
+    }
 }
