@@ -30,4 +30,8 @@ class MenuRepository
     public function menuTree(){
         return $this->model->with('children')->where('parent_id',0)->get();
     }
+
+    public function menuNameIds(){
+        return $this->model->with('children')->where('parent_id',0)->pluck('id','name');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\MenuRepository;
 use App\Repositories\UserRepository;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -10,14 +11,17 @@ use App\Http\Controllers\ApiController;
 class UserController extends ApiController
 {
     protected $userRepository;
+    private $menuRepository ;
 
     /**
      * UserController constructor.
      * @param UserRepository $userRepository
+     * @param MenuRepository $menuRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository,MenuRepository $menuRepository)
     {
         $this->userRepository = $userRepository;
+        $this->menuRepository = $menuRepository;
     }
 
     /**
@@ -40,10 +44,10 @@ class UserController extends ApiController
                     'scope' => '*',
                 ],
             ]);
-            return json_decode((string)$response->getBody(), true);
+            return $this->successResponse(json_decode((string)$response->getBody(), true));
         } catch (\Exception $e) {
             $status = $e->getCode();
-            return $this->apiResponse('error', $e->getMessage(), $status);
+            return $this->errorResponse('error'.$e->getMessage(), $status);
         }
 
     }
@@ -68,7 +72,8 @@ class UserController extends ApiController
     public function userInfo(Request $request)
     {
         $user = $request->user();
-        return $this->successResponse($user);
+        $menus = $this->menuRepository->menuNameIds();
+        return $this->successResponse(compact('user','menus'));
     }
 
     /**
