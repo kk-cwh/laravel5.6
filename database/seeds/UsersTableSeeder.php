@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'name' => 'admin',
-                'email' => 'admin@pigjian.com',
+                'email' => 'zhangykvip@126.com',
                 'password' => Hash::make('admin'),
                 'is_admin' => true,
                 'created_at'  => Carbon::now(),
